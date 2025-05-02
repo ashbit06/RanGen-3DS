@@ -83,7 +83,7 @@ VERSION_FN := buildinfo
 # Code generation options
 ARCH       := -march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft
 CFLAGS     := -g -Wall -O2 -mword-relocations -fomit-frame-pointer -ffunction-sections $(ARCH)
-CFLAGS     += -DARM11 -D_3DS
+CFLAGS     += -DARM11 -D__3DS__
 CXXFLAGS   := $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++11
 ASFLAGS    := -g $(ARCH)
 LDFLAGS     = -specs=3dsx.specs -g $(ARCH) -Wl,-Map,$(TMP)/$(notdir $*).map
@@ -273,7 +273,16 @@ $(FN_TPL_H): $(TMP)
 $(VFILE_C): $(FN_TPL_C)
 	touch $@
 	cat $(VFILE_TPL_C) | awk '/^\{\{--\}\}/ { exit(0) }; 1;' > $@
-	cvars=($(VVARS)); cexpl=($(subst _, ,$(addprefix ",$(addsuffix ",$(VEXPL))))); for n in $(VVARS_L); do lc=$$(echo $${cvars[$$n]} | tr '[:upper:]' '[:lower:]'); cat $(FN_TPL_C) | sed "s/{{1}}/$${cexpl[$$n]}/" | sed "s/{{2}}/$$lc/" | sed "s/{{3}}/$${cvars[$$n]}/" >> $@; echo >> $@; done
+	cvars=($(VVARS)); cexpl=($(subst _, ,$(addprefix ",$(addsuffix ",$(VEXPL))))); \
+	for n in $(VVARS_L); do \
+		lc=$$(echo $${cvars[$$n]} | tr '[:upper:]' '[:lower:]'); \
+		val=$$(eval echo \$${cvars[$$n]}); \
+		cat $(FN_TPL_C) | \
+		sed "s/{{1}}/$${cexpl[$$n]}/" | \
+		sed "s/{{2}}/$$lc/" | \
+		sed "s/{{3}}/$$val/" >> $@; \
+		echo >> $@; \
+	done	
 
 $(VFILE_H): $(FN_TPL_H)
 	touch $@

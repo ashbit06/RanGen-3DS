@@ -1,4 +1,4 @@
-## 3DS devkitARM C development template
+# 3DS devkitARM C development template
 
 **Note: this repo isn't quite ready yet. It still needs some minor fixes and testing.**
 
@@ -10,7 +10,7 @@ This is a template for developing new 3DS games and applications in C. It's base
 * Generates a C file with build-time information such as the Git repo state (for easy version indication)
 * Testing commands (for [Citra](https://citra-emu.org/) and for real hardware)
 
-### Template structure
+## Template structure
 
 This file structure has been kept as simple as possible. A brief overview:
 
@@ -21,7 +21,7 @@ This file structure has been kept as simple as possible. A brief overview:
 * `tmp/` - temporary files used during the build process *(created on build)*
 * `project.cfg` - project metadata and configuration
 
-The source directory contains some very basic examples and the generated `version.c` file ([see below]()).
+The source directory contains some very basic examples and the generated `version.c` file ([see below](#projectcfg-file)).
 
 ### `project.cfg` file
 
@@ -31,7 +31,7 @@ To run the makefile, the following items are **required** to be specified: `titl
 
 Check if your **CIA ID** (also called **title ID**) and **product code** aren't already in use through the [3DS DB](http://www.3dsdb.com/) website. The CIA ID is 6-digit hexadecimal number, and a product code usually contains "CTR" and a 4-length alphanumeric string (like our default value of `CTR-APPT`). Accidentally reusing a code will cause the other program to be removed when installing.
 
-### Building the project
+## Building the project
 
 To build, all you need to do is run **`make`**. This will generate all target files, including `3dsx` ([Homebrew Launcher](https://github.com/fincs/new-hbmenu) executable) and `cia` (installable app via [FBI](https://github.com/Steveice10/FBI) under [Luma3DS](https://github.com/AuroraWright/Luma3DS/wiki); this will show up on your 3DS's home screen). The script will check whether you have all necessary prerequisites installed.
 
@@ -41,7 +41,7 @@ If you have [Citra](https://citra-emu.org/) installed, running **`make test`** w
 
 For testing on a 3DS, first open the Homebrew Launcher and press Y to listen for network programs. Then run **`make 3ds`** to launch your `3dsx` file on your 3DS.
 
-### Displaying build info in-app
+## Displaying build info in-app
 
 It's useful for your users (especially testers) to be able to see a version indicator in your application for bug reporting and to ensure they're on the latest version.
 
@@ -77,23 +77,23 @@ Most useful are the preformatted **`APP_REPO_VERSION`** and **`APP_REPO_LONG_VER
 
 Since all information is passed on in the compile command and ends up only in the object file, this file only needs to be generated once and can then be committed to the repository.
 
-### Lua development
+## Lua development
 
 If you prefer, it's possible to develop 3DS applications using [Lua](https://en.wikipedia.org/wiki/Lua_(programming_language)) instead.
 
-Have a look at the **[3DS Lua development template]()** for more information.
+Have a look at the **[3DS Lua development template](#lua-development)** for more information.
 
-### 3DS development resources
+## 3DS development resources
 
 * **[3DBrew](https://3dbrew.org/)** - see their guide on [setting up a dev environment](https://3dbrew.org/wiki/Setting_up_Development_Environment)
 * **[devkitPro](https://devkitpro.org/)** - the ARM cross compiling toolchain software
 * **[libctru](http://smealum.github.io/ctrulib/)** - CTR User Library documentation
-    * See their [code example repository](https://github.com/devkitPro/3ds-examples)
+  * See their [code example repository](https://github.com/devkitPro/3ds-examples)
 * **[m3diaLib-CTR](https://github.com/m3diaLib-Team/m3diaLib-CTR)** - C++ library for easier 3DS homebrew development
 * **[GBATEMP](https://gbatemp.net/)** - the largest and most active console hacking and homebrew community
-    * See their [forum](https://gbatemp.net/forums/3ds-homebrew-development-and-emulators.275/) and [wiki page on 3DS homebrew development](https://wiki.gbatemp.net/wiki/3DS_Homebrew_Development)
+  * See their [forum](https://gbatemp.net/forums/3ds-homebrew-development-and-emulators.275/) and [wiki page on 3DS homebrew development](https://wiki.gbatemp.net/wiki/3DS_Homebrew_Development)
 
-### Copyright
+## Copyright
 
 © 2019. [MIT licensed.](https://opensource.org/licenses/MIT)
 
