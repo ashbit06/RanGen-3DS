@@ -87,7 +87,7 @@ CFLAGS     += -DARM11 -D__3DS__
 CXXFLAGS   := $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++11
 ASFLAGS    := -g $(ARCH)
 LDFLAGS     = -specs=3dsx.specs -g $(ARCH) -Wl,-Map,$(TMP)/$(notdir $*).map
-LIBS       := -lctru -lm
+LIBS := -lcitro2d -lcitro3d -lctru -lm
 
 # Define names and descriptions used in generating 'buildinfo.c'. See readme for an overview.
 VVARS      := HASH BRANCH COUNT DATE DATETIME UNIXTIME BUILDTIME OSINFO VERSION REPO_VERSION REPO_LONG_VERSION CFLAGS
