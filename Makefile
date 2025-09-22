@@ -253,6 +253,9 @@ clean:
 	rm -rf $(TARGET)
 	rm -f $(VFILE_C) $(VFILE_H) $(VFILE_O)
 
+# send:
+#   3dslink -a 192.168.1.0 $(OUTPUT).3dsx
+
 $(GFXTMP)/%.t3x	$(TMP)/%.h: $(TMP) %.t3s
 	tex3ds -i $< -H $(TMP)/$*.h -d $(DEPSDIR)/$*.d -o $(GFXTMP)/$*.t3x
 

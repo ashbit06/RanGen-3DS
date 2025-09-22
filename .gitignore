@@ -1,6 +1,8 @@
 # Builds and temporary files
 target/
 tmp/
+build/
+
 
 # Object files
 *.o
@@ -137,4 +139,4 @@ sftp-config.json
 
 # other shit
 RanGen 3DS.code-workspace
-.vscode/c_cpp_properties.json
+.vscode/
