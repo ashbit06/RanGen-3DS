@@ -1,9 +1,17 @@
 #include <3ds.h>
 #include <citro2d.h>
 
-#define TOP_WIDTH      400
-#define BOTTOM_WIDTH   320
-#define SCREEN_HEIGHT  240
+#include "globals.h"
+#include "map.h"
+
+int spawnX = DEFAULT_SPAWNX;
+int spawnY = DEFAULT_SPAWNY;
+int spawnBlock = DEFAULT_SPAWN_BLOCK;
+int caveHeight = DEFAULT_CAVE_HEIGHT;
+int wsChance = DEFAULT_WS_CHANCE;
+int blockVariety = DEFAULT_BLOCK_VARIETY;
+int showTestTiles = DEFAULT_SHOW_TEST_TILES;
+int allTimeCompleted = 0;
 
 int main()
 {
@@ -17,20 +25,25 @@ int main()
 
     C3D_RenderTarget* top = C2D_CreateScreenTarget(GFX_TOP, GFX_LEFT);
 
-    while (aptMainLoop())
-    {
-        hidScanInput();
+    Tile map[15][25];
+    generateMap(map, spawnX, spawnY, caveHeight, wsChance, blockVariety, spawnBlock);
 
+    while (aptMainLoop()) {
+        hidScanInput();
         u32 kDown = hidKeysDown();
 
-        if (kDown & KEY_START)
+        if (K_START)
             break;
+        if (K_L)
+            generateMap(map, spawnX, spawnY, caveHeight, wsChance, blockVariety, spawnBlock);
+        // if (K_R)
+        //     resetPlayer();
 
         C3D_FrameBegin(C3D_FRAME_SYNCDRAW);
-        C2D_TargetClear(top, C2D_Color32f(0.1f, 0.1f, 0.1f, 1.0f));
+        C2D_TargetClear(top, BACKGROUND);
         C2D_SceneBegin(top);
-
-        C2D_DrawRectSolid(0.0, 0.0, 0.0, 100.0, 100.0, C2D_Color32f(1.0, 0.0, 0.0, 1.0));
+        
+        drawMap(map);
 
         C3D_FrameEnd(0);
     }
