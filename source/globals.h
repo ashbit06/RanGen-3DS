@@ -23,26 +23,21 @@
 #define JUMP       -6.16
 #define SPEED       0.68
 
-#define DEFAULT_SPAWNX (int)(TILE_SIZE/2 + PLAYER_SIZE/2)
-#define DEFAULT_SPAWNY (int)(SCREEN_HEIGHT/2 - PLAYER_SIZE/2) - 1
+#define DEFAULT_SPAWNX (int)(TILE_SIZE/2)
+#define DEFAULT_SPAWNY (int)(SCREEN_HEIGHT/2) - 1
 #define DEFAULT_SPAWN_BLOCK     1
 #define DEFAULT_CAVE_HEIGHT     0
-#define DEFAULT_WS_CHANCE      65
+#define DEFAULT_WS_CHANCE      99
 #define DEFAULT_BLOCK_VARIETY  75
 #define DEFAULT_SHOW_TEST_TILES 0
 
-#define K_START (int)(kDown & KEY_START)
-#define K_SELECT (int)(kDown & KEY_SELECT)
-#define K_UP (int)(kDown & KEY_UP)
-#define K_DOWN (int)(kDown & KEY_DOWN)
-#define K_LEFT (int)(kDown & KEY_LEFT)
-#define K_RIGHT (int)(kDown & KEY_RIGHT)
-#define K_A (int)(kDown & KEY_A)
-#define K_B (int)(kDown & KEY_B)
-#define K_X (int)(kDown & KEY_X)
-#define K_Y (int)(kDown & KEY_Y)
-#define K_L (int)(kDown & KEY_L)
-#define K_R (int)(kDown & KEY_R)
+typedef struct {
+    int x, y;
+} PosI;
+
+typedef struct {
+    float x, y;
+} PosF;
 
 struct settings {
     char spawnX[4];
@@ -57,8 +52,10 @@ struct settings {
 
 extern struct settings storedSettings;
 
+int max(const int *arr, size_t n);
+int max(const int *arr, size_t n);
 bool any(bool array[], int size);
 bool all(bool array[], int size);
-bool startsWith(const char *str, const char *prefix);
+bool startsWith(const char* str, const char* prefix);
 
 #endif // DEFINES_H

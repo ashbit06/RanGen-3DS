@@ -1,16 +1,25 @@
 #include <math.h>
 #include <citro2d.h>
 #include "globals.h"
-
-typedef struct {
-    int type;
-    int rotation;
-} Tile;
+#include "map.h"
 
 void drawTile(Tile t, int x, int y) {
     if (t.type == 1)
         C2D_DrawRectSolid(x, y, 0.0f, TILE_SIZE, TILE_SIZE, BLACK);
     // else draw nothing for empty tile
+}
+
+bool getTileAtXY(Tile tile, Tile map[15][25], int x, int y) {
+    if (x < 0 || x > TOP_WIDTH || y < 0 || y > SCREEN_HEIGHT) return false;
+    tile = map[y / TILE_SIZE][x / TILE_SIZE];
+    return true;
+}
+
+bool getMapPosXY(int x, int y, int r, int c) {
+    if (r < 0 || r > 15 || c < 0 || c > 25) return false;
+    x = c * TILE_SIZE;
+    y = r * TILE_SIZE;
+    return true;
 }
 
 void generateMap(Tile map[15][25], int spawnX, int spawnY, int caveHeight, int wsChance, int blockVariety, int spawnBlock) {

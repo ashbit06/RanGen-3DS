@@ -4,15 +4,16 @@ this is a port of my [rangen ce](https://github.com/ashbit06/RanGen_CE) game for
 
 ## how to play
 
-- ~~dpad to move/jump~~
+- dpad to move/jump
 - start to exit
 - left shoulder button to regenerate the map
-- ~~right shoulder button to reset your position~~
+- right shoulder button to reset your position
+- x to pause and show extended player debug info
 
 ## build instructions
 
-you will need the devkitpro 3ds stuff
+you will need the devkitpro 3ds stuff from [devkitpro.org](https://devkitpro.org/)
 
 run `./build.sh` in the terminal with the current working directory as this project
 
-edit it to your 3ds's ip address if you want to send the 3dsx file to your 3ds in the homebrew launcher
+add your 3ds's ip address from the homebrew launcher (press Y) with `IP_3DS="35.40.xxx.xxx"` (replace the x's with the numbers)

@@ -11,8 +11,9 @@ typedef struct {
 } Tile;
 
 void drawTile(Tile t, int x, int y);
+bool getTileAtXY(Tile tile, Tile map[15][25], int x, int y);
+bool getMapPosXY(int x, int y, int r, int c);
 void generateMap(Tile map[15][25], int spawnX, int spawnY, int caveHeight, int wsChance, int blockVariety, int spawnBlock);
-void loadRNGMap(Tile map[15][25], int seed, int iterations, int spawnX, int spawnY, int caveHeight, int wsChance, int blockVariety, int spawnBlock);
 void drawMap(Tile map[15][25]);
 
 // TODO: finish converting this to citro2d

@@ -1,8 +1,22 @@
 #include <string.h>
 #include <stdbool.h>
+#include <limits.h>
+#include <stdlib.h>
 #include "globals.h"
 
 struct settings storedSettings = {0};
+
+int min(const int *arr, size_t n) {
+    int m = 0;
+    for (size_t i = 0; i < n; ++i) if (arr[i] < m) m = arr[i];
+    return m;
+}
+
+int max(const int *arr, size_t n) {
+    int m = 0;
+    for (size_t i = 0; i < n; ++i) if (arr[i] > m) m = arr[i];
+    return m;
+}
 
 bool any(bool array[], int size) {
     bool res = false;
