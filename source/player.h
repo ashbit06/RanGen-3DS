@@ -15,7 +15,7 @@ void resetPlayer(Player* p, int spawnX, int spawnY);
 void getPlayerTilePos(int* tileX, int* tileY, Player* p);
 void getPlayerCornersXY(int corners[4][2], Player* p);
 bool isWithinBounds(Player* p);
-int getCollision(Player* p, Tile map[15][25]);
+bool getCollision(Player* p, Tile map[15][25]);
 void playerMovement(Player* p, Tile map[15][25], bool left, bool right, bool up);
 void drawPlayer(Player* p);
 void debugPlayerPosition(Player* p);

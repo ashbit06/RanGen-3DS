@@ -76,6 +76,16 @@ int main()
             printf("  Bottom-Right: (%d, %d) | (%d, %d)\n", corners[3][0], corners[3][1], cornerTiles[3][0], cornerTiles[3][1]);
             int collision = getCollision(&player, map);
             printf("Collision: %d\n", collision);
+            Tile tl, tr, bl, br;
+            getTileAtXY(&tl, map, (int)player.x, (int)player.y);
+            getTileAtXY(&tr, map, (int)player.x + PLAYER_SIZE - 1, (int)player.y);
+            getTileAtXY(&bl, map, (int)player.x, (int)player.y + PLAYER_SIZE - 1);
+            getTileAtXY(&br, map, (int)player.x + PLAYER_SIZE - 1, (int)player.y + PLAYER_SIZE - 1);
+            printf("Tiles around player\n");
+            printf("    tile at (%d,%d): %d\n", (int)player.x, (int)player.y, tl.type);
+            printf("    tile at (%d,%d): %d\n", (int)player.x + PLAYER_SIZE - 1, (int)player.y, tr.type);
+            printf("    tile at (%d,%d): %d\n", (int)player.x, (int)player.y + PLAYER_SIZE - 1, bl.type);
+            printf("    tile at (%d,%d): %d\n", (int)player.x + PLAYER_SIZE - 1, (int)player.y + PLAYER_SIZE - 1, br.type);
         }
 
         playerMovement(&player, map, kHeld & KEY_LEFT, kHeld & KEY_RIGHT, kHeld & KEY_UP);

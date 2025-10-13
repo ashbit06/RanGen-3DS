@@ -9,9 +9,10 @@ void drawTile(Tile t, int x, int y) {
     // else draw nothing for empty tile
 }
 
-bool getTileAtXY(Tile tile, Tile map[15][25], int x, int y) {
-    if (x < 0 || x > TOP_WIDTH || y < 0 || y > SCREEN_HEIGHT) return false;
-    tile = map[y / TILE_SIZE][x / TILE_SIZE];
+bool getTileAtXY(Tile* tile, Tile map[15][25], int x, int y) {
+    if (!tile) return false;
+    if (x < 0 || x >= TOP_WIDTH || y < 0 || y >= SCREEN_HEIGHT) return false;
+    *tile = map[y / TILE_SIZE][x / TILE_SIZE];
     return true;
 }
 

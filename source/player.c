@@ -45,37 +45,20 @@ bool isWithinBounds(Player* p) {
     return true;
 }
 
-// 0 for no collision, 1 for block collision, 2 for death collision
-int getCollision(Player* p, Tile map[15][25]) {
-    if (!isWithinBounds(p)) {
-        printf("isWithinBounds: player is out of bounds\n");
-        return 0;
-    }
-    // int collision = 0;
+bool getCollision(Player* p, Tile map[15][25]) {
+    Tile buffer;
+    int tl, tr, bl, br;
 
-    // get the corners of the player and get which tiles they reside in, then check if they are within a block on each tile
-    Tile t;
-    int corners[4][2];
-    getPlayerCornersXY(corners, p);
-    int cornerTileX, cornerTileY;
-    
-    int collisions[4] = {0, 0, 0, 0};
-    for (int c = 0; c < 4; c++) {
-        if (!getTileAtXY(t, map, corners[c][0], corners[c][1])) {
-            printf("getTileAtXY: tile not found\n");
-            continue;
-        }
-        cornerTileX = corners[c][0] % TILE_SIZE;
-        cornerTileY = corners[c][1] % TILE_SIZE;
-        if (t.type == 0) continue; // empty tile
+    if (getTileAtXY(&buffer, map, (int)p->x, (int)p->y) && p->y) tl = buffer.type;
+    else tl = 0;
+    if (getTileAtXY(&buffer, map, (int)p->x+PLAYER_SIZE-1, (int)p->y) && p->y) tr = buffer.type;
+    else tr = 0;
+    if (getTileAtXY(&buffer, map, (int)p->x, (int)p->y+PLAYER_SIZE-1) && p->y) bl = buffer.type;
+    else bl = 0;
+    if (getTileAtXY(&buffer, map, (int)p->x+PLAYER_SIZE-1, (int)p->y+PLAYER_SIZE-1) && p->y) br = buffer.type;
+    else br = 0;
 
-        // check if the corner is within the block
-        if (t.type == 1) collisions[c] =
-            cornerTileX >= 0 && cornerTileX < TILE_SIZE &&
-            cornerTileY >= 0 && cornerTileY < TILE_SIZE ? 1 : 0; // block
-    }
-
-    return max(collisions, 4);
+    return tl && tr && bl && br;
 }
 
 void playerMovement(Player* p, Tile map[15][25], bool left, bool right, bool up) {
@@ -84,25 +67,28 @@ void playerMovement(Player* p, Tile map[15][25], bool left, bool right, bool up)
     // handle vertical movement
     p->dy += GRAVITY;
     p->y -= p->dy;
-    if (getCollision(p, map)) {
+    if (getCollision(p, map) > 0 && p->y > 0) {
         // floor collision
         int safety = 0;
-        while (getCollision(p, map) && safety < 50) {
+        while (getCollision(p, map) > 0 && safety < 50) {
             p->y += fabsf(p->dy) / p->dy;
             safety++;
         }
 
         // jump
         p->dy = -JUMP * (up && fabsf(p->dy)/p->dy == -1);
+    } else if (p->y < 0) {
+        p->y = 0;
+        p-> dy = 0;
     }
 
     // handle horizontal movement
     p->dx = FRICTION * (p->dx + SPEED*right - SPEED*left*2);
     p->x += p->dx;
-    if (getCollision(p, map)) {
+    if (getCollision(p, map) > 0 && p->x > 0) {
         // wall collision
         int safety = 0;
-        while (getCollision(p, map) && safety < 20) {
+        while (getCollision(p, map) > 0 && safety < 20) {
             p->x -= fabsf(p->dx) / p->dx;
             safety++;
         }
@@ -112,6 +98,9 @@ void playerMovement(Player* p, Tile map[15][25], bool left, bool right, bool up)
             p->dy = -JUMP;
             p->dx = fabsf(p->dx) / p->dx * -6;
         }
+    } else if (p->x < 0) {
+        p->x = 0;
+        p->dx = 0;
     }
 }
 
