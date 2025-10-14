@@ -58,7 +58,7 @@ bool getCollision(Player* p, Tile map[15][25]) {
     if (getTileAtXY(&buffer, map, (int)p->x+PLAYER_SIZE-1, (int)p->y+PLAYER_SIZE-1) && p->y) br = buffer.type;
     else br = 0;
 
-    return tl && tr && bl && br;
+    return tl || tr || bl || br;
 }
 
 void playerMovement(Player* p, Tile map[15][25], bool left, bool right, bool up) {
@@ -105,7 +105,7 @@ void playerMovement(Player* p, Tile map[15][25], bool left, bool right, bool up)
 }
 
 void drawPlayer(Player* p) {
-    C2D_DrawRectSolid((int)(p->x - PLAYER_SIZE / 2), (int)(p->y - PLAYER_SIZE / 2), 0.0f, PLAYER_SIZE, PLAYER_SIZE, PLAYER_COLOR);
+    C2D_DrawRectSolid((int)p->x, (int)p->y, 0.0f, PLAYER_SIZE, PLAYER_SIZE, PLAYER_COLOR);
 }
 
 void debugPlayerPosition(Player* p) {
