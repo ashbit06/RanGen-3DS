@@ -5,13 +5,22 @@
 #include "globals.h"
 #include "map.h"
 
+#define PLAYER_SIZE 5
+#define DEFAULT_GRAVITY -0.16
+#define DEFAULT_FRICTION 0.80
+#define DEFAULT_JUMP     3.08
+#define DEFAULT_SPEED    0.30
+
 typedef struct {
     float x, y;
     float dx, dy;
+    float jump, speed;
+    float gravity, friction;
     bool canmove;
 } Player;
 
 void resetPlayer(Player* p, int spawnX, int spawnY);
+void resetPlayerDefaults(Player* p);
 void getPlayerTilePos(int* tileX, int* tileY, Player* p);
 void getPlayerCornersXY(int corners[4][2], Player* p);
 bool isWithinBounds(Player* p);

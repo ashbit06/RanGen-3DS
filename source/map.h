@@ -5,16 +5,19 @@
 #include <citro2d.h>
 #include "globals.h"
 
+#define MAP   Tile map[15][25]
+
+
 typedef struct {
     int type;
     int rotation;
 } Tile;
 
 void drawTile(Tile t, int x, int y);
-bool getTileAtXY(Tile* tile, Tile map[15][25], int x, int y);
+bool getTileAtXY(Tile* tile, MAP, int x, int y);
 bool getMapPosXY(int x, int y, int r, int c);
-void generateMap(Tile map[15][25], int spawnX, int spawnY, int caveHeight, int wsChance, int blockVariety, int spawnBlock);
-void drawMap(Tile map[15][25]);
+void generateMap(MAP, int spawnX, int spawnY, int caveHeight, int wsChance, int blockVariety, int spawnBlock);
+void drawMap(MAP);
 
 // TODO: finish converting this to citro2d
 // void mapSprite(C2D_Sprite sprite, Tile map[15][25]);

@@ -13,6 +13,13 @@ void resetPlayer(Player* p, int spawnX, int spawnY) {
     printf("player reset to (%d, %d)\n", spawnX, spawnY);
 }
 
+void resetPlayerDefaults(Player* p) {
+    p->jump = DEFAULT_JUMP;
+    p->speed = DEFAULT_SPEED;
+    p->gravity = DEFAULT_GRAVITY;
+    p->friction = DEFAULT_FRICTION;
+}
+
 void getPlayerTilePos(int* tileX, int* tileY, Player* p) {
     *tileX = (int)(p->x) % TILE_SIZE;
     *tileY = (int)(p->y) % TILE_SIZE;
@@ -45,7 +52,7 @@ bool isWithinBounds(Player* p) {
     return true;
 }
 
-bool getCollision(Player* p, Tile map[15][25]) {
+bool getCollision(Player* p, MAP) {
     Tile buffer;
     int tl, tr, bl, br;
 
@@ -61,11 +68,11 @@ bool getCollision(Player* p, Tile map[15][25]) {
     return tl || tr || bl || br;
 }
 
-void playerMovement(Player* p, Tile map[15][25], bool left, bool right, bool up) {
+void playerMovement(Player* p, MAP, bool left, bool right, bool up) {
     if (!p->canmove) return;
     
     // handle vertical movement
-    p->dy += GRAVITY;
+    p->dy += p->gravity;
     p->y -= p->dy;
     if (getCollision(p, map) > 0 && p->y > 0) {
         // floor collision
@@ -76,14 +83,14 @@ void playerMovement(Player* p, Tile map[15][25], bool left, bool right, bool up)
         }
 
         // jump
-        p->dy = -JUMP * (up && fabsf(p->dy)/p->dy == -1);
+        p->dy = p->jump * (up && fabsf(p->dy)/p->dy == -1);
     } else if (p->y < 0) {
         p->y = 0;
         p-> dy = 0;
     }
 
     // handle horizontal movement
-    p->dx = FRICTION * (p->dx + SPEED*right - SPEED*left*2);
+    p->dx = p->friction * (p->dx + p->speed * (right - left));
     p->x += p->dx;
     if (getCollision(p, map) > 0 && p->x > 0) {
         // wall collision
@@ -95,8 +102,8 @@ void playerMovement(Player* p, Tile map[15][25], bool left, bool right, bool up)
 
         // wall jump
         if (up) {
-            p->dy = -JUMP;
-            p->dx = fabsf(p->dx) / p->dx * -6;
+            p->dy = p->jump;
+            p->dx = fabsf(p->dx) / p->dx * -3;
         }
     } else if (p->x < 0) {
         p->x = 0;

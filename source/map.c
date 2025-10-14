@@ -9,7 +9,7 @@ void drawTile(Tile t, int x, int y) {
     // else draw nothing for empty tile
 }
 
-bool getTileAtXY(Tile* tile, Tile map[15][25], int x, int y) {
+bool getTileAtXY(Tile* tile, MAP, int x, int y) {
     if (!tile) return false;
     if (x < 0 || x >= TOP_WIDTH || y < 0 || y >= SCREEN_HEIGHT) return false;
     *tile = map[y / TILE_SIZE][x / TILE_SIZE];
@@ -23,11 +23,11 @@ bool getMapPosXY(int x, int y, int r, int c) {
     return true;
 }
 
-void generateMap(Tile map[15][25], int spawnX, int spawnY, int caveHeight, int wsChance, int blockVariety, int spawnBlock) {
+void generateMap(MAP, int spawnX, int spawnY, int caveHeight, int wsChance, int blockVariety, int spawnBlock) {
     for (int y = 0; y < 15; y++) {
         for (int x = 0; x < 25; x++) {
             map[y][x].rotation = 0;
-            if (((rand() % ((int)log(y*TILE_SIZE) * 170 + 170 + abs(caveHeight-500))) + 1) > (wsChance * 6) || ((x*TILE_SIZE == spawnX) && (y*TILE_SIZE == spawnY - TILE_SIZE))) {
+            if (((rand() % ((int)log(y*TILE_SIZE) * (SCREEN_HEIGHT/2) + (SCREEN_HEIGHT/2) + abs(caveHeight-500))) + 1) > (wsChance * 6) || ((x*TILE_SIZE == spawnX) && (y*TILE_SIZE == spawnY - TILE_SIZE))) {
                 map[y][x].type = 1;
             } else {
                 map[y][x].type = 0;  // Empty tile
@@ -39,7 +39,7 @@ void generateMap(Tile map[15][25], int spawnX, int spawnY, int caveHeight, int w
     printf("new map generated\n");
 }
 
-void drawMap(Tile map[15][25]) {
+void drawMap(MAP) {
     for (int y = 0; y < 18; y++) {
         for (int x = 0; x < 25; x++) {
             drawTile(map[y][x], x * TILE_SIZE, y * TILE_SIZE);
@@ -48,7 +48,7 @@ void drawMap(Tile map[15][25]) {
 }
 
 // TODO: finish converting this to citro2d
-// void mapSprite(C2D_Sprite sprite, Tile map[15][25]) {
+// void mapSprite(C2D_Sprite sprite, MAP) {
 //     // uint8_t width = 16, height = 16;
 //     // size_t size = sizeof(gfx_sprite_t) + width * height * sizeof(uint8_t);
 //     // gfx_sprite_t *sprite = malloc(size);

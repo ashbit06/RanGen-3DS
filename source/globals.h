@@ -13,15 +13,10 @@
 #define BLACK       C2D_Color32(0, 0, 0, 255)
 #define RED         C2D_Color32(255, 0, 0, 255)
 #define BACKGROUND  C2D_Color32(222, 222, 222, 255)
-#define PLAYER_COLOR C2D_Color32(255, 100, 100, 255)
+#define PLAYER_COLOR C2D_Color32(255, 50, 50, 255)
 
 #define TILE_SIZE  16
 #define BG_COLOR    1
-#define PLAYER_SIZE 5
-#define GRAVITY    -0.32
-#define FRICTION    0.64
-#define JUMP       -6.16
-#define SPEED       0.68
 
 #define DEFAULT_SPAWNX (int)(TILE_SIZE/2)
 #define DEFAULT_SPAWNY (int)(SCREEN_HEIGHT/2) - 1
