@@ -9,6 +9,8 @@ this is a port of my [rangen ce](https://github.com/ashbit06/RanGen_CE) game for
 - left shoulder button to regenerate the map
 - right shoulder button to reset your position
 - x to pause and show extended player debug info
+  - use L/ZL/ZR/R + up/down on the dpad to adjust player movement values
+  - y to reset player movement values
 
 ## build instructions
 
