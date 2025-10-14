@@ -9,11 +9,13 @@ this is a port of my [rangen ce](https://github.com/ashbit06/RanGen_CE) game for
 - left shoulder button to regenerate the map
 - right shoulder button to reset your position
 - x to pause and show extended player debug info
+  - use L/ZL/ZR/R + up/down on the dpad to adjust player movement values
+  - y to reset player movement values
 
 ## build instructions
 
 you will need the devkitpro 3ds stuff from [devkitpro.org](https://devkitpro.org/)
 
-run `./build.sh` in the terminal with the current working directory as this project
+run `./build.sh` in the terminal with the current working directory as the project root
 
 add your 3ds's ip address from the homebrew launcher (press Y) with `IP_3DS="35.40.xxx.xxx"` (replace the x's with the numbers)
