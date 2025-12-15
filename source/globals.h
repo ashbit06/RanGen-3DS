@@ -12,7 +12,7 @@
 #define WHITE       C2D_Color32(255, 255, 255, 255)
 #define BLACK       C2D_Color32(0, 0, 0, 255)
 #define RED         C2D_Color32(255, 0, 0, 255)
-#define BACKGROUND  C2D_Color32(222, 222, 222, 255)
+#define BACKGROUND  C2D_Color32(210, 210, 210, 255)
 #define PLAYER_COLOR C2D_Color32(255, 50, 50, 255)
 
 #define TILE_SIZE  16
