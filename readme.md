@@ -18,4 +18,4 @@ you will need the devkitpro 3ds stuff from [devkitpro.org](https://devkitpro.org
 
 run `./build.sh` in the terminal with the current working directory as the project root
 
-add your 3ds's ip address from the homebrew launcher (press Y) with `IP_3DS="35.40.xxx.xxx"` (replace the x's with the numbers)
+add your 3ds's ip address from the homebrew launcher (press Y) with `IP_3DS="xxx.xxx.xxx.xxx"` (replace the x's with the numbers)
