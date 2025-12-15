@@ -23,6 +23,7 @@ endef
 
 # Information about the application, to be included in the SMDH/CIA files.
 APP_TITLE  := $(call proj_metadata,title)
+APP_ICON   := $(call proj_metadata,icon)
 APP_DESC   := $(call proj_metadata,description)
 APP_CODE   := $(shell echo $(call proj_metadata,code) | tr [:lower:] [:upper:])
 APP_COPY   := $(call proj_metadata,copyright)
